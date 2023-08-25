@@ -19,6 +19,7 @@ export default async function Page() {
     //cookies: cookies().getAll(),
   });
 
+  console.log("process.env", process.env)
   const res = await fetch(process.env.NEXTAUTH_URL + "/api/sample",{ 
     cache: 'no-cache',
     method: "GET",
