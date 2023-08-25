@@ -8,13 +8,15 @@ type ClientType = {
 };
 
 export const authOptions: NextAuthOptions = {
+  debug: true,
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     } as ClientType),
-  ]
+  ],
+  session: { strategy: "jwt" },
 };
 
 // export const authOptions: NextAuthOptions = {

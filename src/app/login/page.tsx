@@ -4,10 +4,15 @@ import React from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { NextPage } from "next";
 import Link from 'next/link'
+import { useRouter } from "next/navigation";
 
 export default function Page() {
   const { data: session } = useSession();
+  const router = useRouter();
 
+  const dbpage = () => {
+    router.push("/db")
+  }
   
   return (
     <>
@@ -18,7 +23,13 @@ export default function Page() {
             <h1>ようこそ, {session.user && session.user.email}</h1>
             <Link href="/profile">Profile</Link>
             <br/>
-            <button onClick={() => signOut()}>ログアウト</button>
+            <div>
+              <button onClick={() => signOut()}>ログアウト</button>
+            </div>
+            <div>
+              <button onClick={() => dbpage()}>DBページ</button>
+            </div>
+            
           </div>
         )
       }
