@@ -2,6 +2,8 @@
 
 import React from "react";
 import { useForm } from "react-hook-form";
+import { fetchUrl } from "@/libs/utils";
+import { useParams, useRouter } from 'next/navigation';
 
 type Form = {
   id?: string
@@ -10,6 +12,8 @@ type Form = {
 
 export default function Input() {
   const [msg, setMsg] = React.useState<string | null>(null);
+  const router = useRouter()
+
   const {
     register,
     watch,
@@ -32,7 +36,7 @@ export default function Input() {
             cache: "no-store",  // キャッシュを使用しない
             body: JSON.stringify({ data }),
         };
-        const res = await fetch('/api/sample', options)
+        const res = await fetch(fetchUrl('/api/sample'), options)
         const redData = await res.json()
 
         console.log(res.status)
@@ -40,6 +44,9 @@ export default function Input() {
         if (res.status === 200) {
             setMsg("登録完了")
             setValue("id", redData.Sample.id)
+
+            router.refresh()
+            router.push(`/db_update/${redData.Sample.id}`)
         } else {
             setMsg("登録エラー")
         }

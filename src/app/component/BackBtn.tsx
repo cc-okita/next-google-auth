@@ -1,9 +1,9 @@
 "use client"
+
 import { useParams, useRouter } from 'next/navigation';
 
-const classNames = (...classes:string[]) => {
-    return classes.filter(Boolean).join(' ')
-}
+import { classNames } from '@/libs/utils';
+
 
 export default function BackBtn() {
 

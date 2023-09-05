@@ -1,8 +1,6 @@
 import React from "react";
-import Link from 'next/link'
 
 import { redirect } from 'next/navigation'
-
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/libs/auth";
 import { fetchUrl, getAllCookies } from "@/libs/utils";
@@ -41,18 +39,14 @@ export default async function Page({ params }:{ params:Params }) {
 
   return (
     <>
-      <h1>DB 表示ページ</h1>
+    <div className="container p-5">
+      <h1 className="inline-block mb-2 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">DB 確認ページ (Update&Delete)</h1>
       <div className="p-5">
         <BackBtn></BackBtn>
         <Update data={data}></Update>
       </div>
-
-
+    </div>
 
     </>
   );
-}
-
-async function getList(){
-
 }

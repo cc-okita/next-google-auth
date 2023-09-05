@@ -8,8 +8,11 @@ export default function Page() {
 
   return (
     <>
+    <div className="container p-5">
     <h1>エラー</h1>
     <pre>エラーが発生しました</pre>
+    </div>
+
     </>
   );
 }

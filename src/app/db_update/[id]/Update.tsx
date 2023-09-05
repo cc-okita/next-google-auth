@@ -3,7 +3,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useParams, useRouter } from 'next/navigation';
-
+import { fetchUrl } from "@/libs/utils";
 
 type Form = {
   id?: string
@@ -40,7 +40,7 @@ export default function Dsip({data}:{data:Form}) {
             cache: "no-store",  // キャッシュを使用しない
             body: JSON.stringify({ data }),
         };
-        const res = await fetch(`/api/sample/${params.id}`, options)
+        const res = await fetch(fetchUrl(`/api/sample/${params.id}`), options)
         const redData = await res.json()
 
         console.log(res.status)
@@ -48,6 +48,7 @@ export default function Dsip({data}:{data:Form}) {
         if (res.status === 200) {
             setMsg("更新完了")
             setValue("id", redData.Sample.id)
+            setValue("updated_at", redData.Sample.updated_at)
 
             console.log("", redData)
         } else {
@@ -67,25 +68,27 @@ export default function Dsip({data}:{data:Form}) {
 
   // 削除呼び出し
   const onClickDelete = async () => {
-    const options: RequestInit = {
+
+    if(window.confirm( '削除します。よろしいですか？')) {
+      const options: RequestInit = {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
         },
         cache: "no-store",  // キャッシュを使用しない
-    };
-    const res = await fetch(`/api/sample/${params.id}`, options)
-    const redData = await res.json()
+      };
 
-    console.log(res.status)
+      const res = await fetch(fetchUrl(`/api/sample/${params.id}`), options)
+      const redData = await res.json()
+      console.log(res.status)
 
-    if (res.status === 200) {
-      router.refresh()
-      router.push('/db')
-    } else {
-        setMsg("削除エラー")
+      if (res.status === 200) {
+        router.refresh()
+        router.push('/db')
+      } else {
+          setMsg("削除エラー")
+      }
     }
-
   };
 
   return (
