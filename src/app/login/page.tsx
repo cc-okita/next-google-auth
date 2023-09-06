@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 
 import { classNames } from '@/libs/utils';
 import Btn from '@/app/component/Btn';
+import ChangeTheme from '@/app/component/ChangeTheme';
+
 
 export default function Page() {
   const { data: session } = useSession();
@@ -39,7 +41,8 @@ export default function Page() {
               </div>
               <div className="pt-2">
                 <Btn label="DBページ" onClick={()=>{router.push("/db")}}></Btn>
-              </div>              
+              </div>
+              <ChangeTheme></ChangeTheme>           
             </>
           )
         }

@@ -15,7 +15,15 @@ export default function InsertBtn() {
         router.push('/db_entry')
     }
 
+    const onBack = () => {
+      router.refresh()
+      router.push('/login')
+  }
+
   return (
-    <Btn label="新規登録" onClick={onInsert} />
+    <>
+      <Btn label="戻る" onClick={onBack} />
+      <Btn label="新規登録" onClick={onInsert} />
+    </>
   );
 }
